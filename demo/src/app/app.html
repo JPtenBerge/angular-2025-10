@@ -6,9 +6,9 @@
 
 <h1 class="text-3xl font-bold">Snacks</h1>
 
-<div class="flex">
+<div class="flex gap-5">
 	<form (submit)="addSnack()" #form="ngForm">
-		<h2>Snack toevoegen</h2>
+		<h2 class="text-2xl font-bold">Snack toevoegen</h2>
 
 		<ol class="grid grid-cols-[max-content_14em_1fr] gap-x-2 gap-y-3">
 			<li class="col-span-3 grid grid-cols-subgrid items-center">
@@ -70,26 +70,30 @@
 
 	<!-- <input [value]="naam" (keydown)="updateValue()" -->
 
-	@if (!snacks || snacks.length === 0) {
-		<p>Geen snacks momenteel!</p>
-	} @else {
-		<table>
-			<thead>
-				<tr>
-					<th>Naam</th>
-					<th>kcal</th>
-					<th>Foto</th>
-				</tr>
-			</thead>
-			<tbody>
-				@for (snack of snacks; track snack.name) {
-					<tr [class.vet]="snack.kcal > 100" (click)="snack.kcal = snack.kcal - 20">
-						<td>{{ snack.name }}</td>
-						<td>{{ snack.kcal }}</td>
-						<td><img [src]="snack.photoUrl" /></td>
+	<div>
+		<h2 class="text-2xl font-bold">Snacks</h2>
+
+		@if (!snacks || snacks.length === 0) {
+			<p>Geen snacks momenteel!</p>
+		} @else {
+			<table>
+				<thead>
+					<tr>
+						<th>Naam</th>
+						<th>kcal</th>
+						<th>Foto</th>
 					</tr>
-				}
-			</tbody>
-		</table>
-	}
+				</thead>
+				<tbody>
+					@for (snack of snacks; track snack.name) {
+						<tr [class.vet]="snack.kcal > 100" (click)="snack.kcal = snack.kcal - 20">
+							<td>{{ snack.name }}</td>
+							<td>{{ snack.kcal }}</td>
+							<td><img [src]="snack.photoUrl" /></td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		}
+	</div>
 </div>
