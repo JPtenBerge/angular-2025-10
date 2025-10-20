@@ -4,68 +4,92 @@
 <!-- <add-stuff-dialog #addStuffDialog />
 <button (click)="addStuffDialog.open()">Open dialog</button> -->
 
-<form (submit)="addSnack()" #form="ngForm">
-	<ol>
-		<li>
-			<label for="input-name">Naam:</label>
-			<input
-				id="input-name"
-				[(ngModel)]="newSnack.name"
-				name="name"
-				required
-				pattern="^[a-zA-Z -]{3,}$"
-				#inputName="ngModel"
-			/>
+<h1 class="text-3xl font-bold">Snacks</h1>
 
-			<!-- <validation-message for="name" /> -->
+<div class="flex">
+	<form (submit)="addSnack()" #form="ngForm">
+		<h2>Snack toevoegen</h2>
 
-			@if (inputName.touched && !inputName.valid) {
-				<span>*</span>
-			}
-			@if (inputName.touched && inputName.hasError('required')) {
-				<span>Vul in aub</span>
-			}
-			@if (inputName.touched && inputName.hasError('pattern')) {
-				<span>Enkel letters, spaties en streepjes graag. En minimaal 3 karakters.</span>
-			}
-		</li>
-		<li>
-			<label for="input-kcal">KCal:</label>
-			<input id="input-kcal" [(ngModel)]="newSnack.kcal" name="kcal" type="number" required />
-		</li>
-		<li>
-			<label for="input-photo-url">Foto URL:</label>
-			<input id="input-photo-url" [(ngModel)]="newSnack.photoUrl" name="photoUrl" required />
-		</li>
-		<li>
-			<button [disabled]="!form.valid">Voeg snack toe</button>
-		</li>
-	</ol>
+		<ol class="grid grid-cols-[max-content_14em_1fr] gap-x-2 gap-y-3">
+			<li class="col-span-3 grid grid-cols-subgrid items-center">
+				<label for="input-name">Naam:</label>
+				<input
+					id="input-name"
+					class="input not-[.ng-untouched]:not-[.ng-valid]:input-error"
+					[(ngModel)]="newSnack.name"
+					name="name"
+					required
+					pattern="^[a-zA-Z \-]{3,}$"
+					#inputName="ngModel"
+				/>
 
-	<pre>{{ newSnack | json }}</pre>
-</form>
+				<!-- <validation-message for="name" /> -->
 
-<!-- <input [value]="naam" (keydown)="updateValue()" -->
+				<div>
+					@if (inputName.touched && !inputName.valid) {
+						<span>*</span>
+					}
+					@if (inputName.touched && inputName.hasError('required')) {
+						<span>Vul in aub</span>
+					}
+					@if (inputName.touched && inputName.hasError('pattern')) {
+						<span>Enkel letters, spaties en streepjes graag. En minimaal 3 karakters.</span>
+					}
+				</div>
+			</li>
+			<li class="col-span-3 grid grid-cols-subgrid items-center">
+				<label for="input-kcal">KCal:</label>
+				<input
+					id="input-kcal"
+					class="input not-[.ng-untouched]:not-[.ng-valid]:input-error"
+					[(ngModel)]="newSnack.kcal"
+					name="kcal"
+					type="number"
+					required
+				/>
+				<div></div>
+			</li>
+			<li class="col-span-3 grid grid-cols-subgrid items-center">
+				<label for="input-photo-url">Foto URL:</label>
+				<input
+					id="input-photo-url"
+					class="input not-[.ng-untouched]:not-[.ng-valid]:input-error"
+					[(ngModel)]="newSnack.photoUrl"
+					name="photoUrl"
+					required
+				/>
+				<div></div>
+			</li>
+			<li class="col-span-3">
+				<button [disabled]="!form.valid" class="btn btn-primary">Voeg snack toe</button>
+			</li>
+		</ol>
 
-@if (!snacks || snacks.length === 0) {
-	<p>Geen snacks momenteel!</p>
-} @else {
-	<table>
-		<thead>
-			<tr>
-				<th>Naam</th>
-				<th>kcal</th>
-				<th>Foto</th>
-			</tr>
-		</thead>
-		<tbody>
-			@for (snack of snacks; track snack.name) {
-				<tr [class.vet]="snack.kcal > 100" (click)="snack.kcal = snack.kcal - 20">
-					<td>{{ snack.name }}</td>
-					<td>{{ snack.kcal }}</td>
-					<td><img [src]="snack.photoUrl" /></td>
+		<pre>{{ newSnack | json }}</pre>
+	</form>
+
+	<!-- <input [value]="naam" (keydown)="updateValue()" -->
+
+	@if (!snacks || snacks.length === 0) {
+		<p>Geen snacks momenteel!</p>
+	} @else {
+		<table>
+			<thead>
+				<tr>
+					<th>Naam</th>
+					<th>kcal</th>
+					<th>Foto</th>
 				</tr>
-			}
-		</tbody>
-	</table>
-}
+			</thead>
+			<tbody>
+				@for (snack of snacks; track snack.name) {
+					<tr [class.vet]="snack.kcal > 100" (click)="snack.kcal = snack.kcal - 20">
+						<td>{{ snack.name }}</td>
+						<td>{{ snack.kcal }}</td>
+						<td><img [src]="snack.photoUrl" /></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+</div>

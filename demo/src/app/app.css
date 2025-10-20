@@ -4,13 +4,13 @@ td img {
 .vet {
     background: lightgoldenrodyellow;
 }
-
+/* 
 input.ng-touched.ng-valid {
     background: lightgreen;
 }
 input.ng-touched.ng-invalid {
     background: lightpink;
-}
+} */
 
 button:disabled {
     box-shadow: 0 0 4px red;

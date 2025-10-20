@@ -1,0 +1,17 @@
+{
+	"plugins": ["prettier-plugin-tailwindcss"],
+	"printWidth": 130,
+	"arrowParens": "avoid",
+	"useTabs": true,
+	"singleQuote": true,
+	"bracketSpacing": true,
+	"htmlWhitespaceSensitivity": "ignore",
+	"overrides": [
+		{
+			"files": "*.html",
+			"options": {
+				"parser": "angular"
+			}
+		}
+	]
+}
