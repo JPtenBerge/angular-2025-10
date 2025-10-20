@@ -1,0 +1,33 @@
+naam: {{ naam }}
+
+<button (click)="changeName()">Verander naam</button>
+
+
+<input [(ngModel)]="naam">
+
+<!-- <input [value]="naam" (keydown)="updateValue()" -->
+
+@if (!snacks || snacks.length === 0) {
+<p>Geen snacks momenteel!</p>
+} @else {
+<table>
+	<thead>
+		<tr>
+			<th>Naam</th>
+			<th>kcal</th>
+			<th>Foto</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for (snack of snacks; track snack.name) {
+		<tr [class.vet]="snack.kcal > 100" (click)="snack.kcal = snack.kcal - 20">
+			<td>{{ snack.name }}</td>
+			<td>{{ snack.kcal }}</td>
+			<td><img [src]="snack.photoUrl" /></td>
+		</tr>
+
+		}
+	</tbody>
+</table>
+
+}
