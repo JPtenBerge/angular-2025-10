@@ -1,7 +1,10 @@
-naam: {{ naam }}
-
+naam: {{ naam | lowercase }}
 <button (click)="changeName()">Verander naam</button>
 
+<hr>
+
+nu: {{nu | date: 'd MMMM y'}}<br>
+bedrag: {{bedrag | euro}}
 
 <input [(ngModel)]="naam">
 

@@ -1,10 +1,12 @@
+import { CurrencyPipe, DatePipe, LowerCasePipe, UpperCasePipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { EuroPipe } from './euro.pipe';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FormsModule],
+  imports: [RouterOutlet, FormsModule, EuroPipe, CurrencyPipe, DatePipe, LowerCasePipe, UpperCasePipe],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -12,6 +14,10 @@ export class App {
   protected readonly title = signal('demo');
 
   naam = 'Reinier';
+
+  nu = new Date();
+  bedrag = 12345678.9 ;
+  // bedrag = '12345678.9';
 
   snacks?: any = [
     { name: 'Kipnugget', kcal: 60, photoUrl: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.restauranttakeoff.nl%2Fwp-content%2Fuploads%2F2020%2F01%2FKipnuggets.png&f=1&nofb=1&ipt=934c20c66ff4f02110b748ece8f76fa4a38141fd0073861080511691496427bf' },
