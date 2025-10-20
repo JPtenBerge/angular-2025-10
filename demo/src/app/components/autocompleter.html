@@ -1,0 +1,10 @@
+
+
+<input class="input" [(ngModel)]="query" (input)="autocomplete()" (keydown.arrowdown)="next()" (keydown.enter)="handleSelect()">
+
+<ul>
+    @for (suggestion of suggestions; track suggestion) {
+        <li [class.bg-yellow-300]="activeSuggestionIndex === $index">{{suggestion | json}}</li>
+    }
+</ul>
+

@@ -4,6 +4,20 @@
 <!-- <add-stuff-dialog #addStuffDialog />
 <button (click)="addStuffDialog.open()">Open dialog</button> -->
 
+<h1 class="text-3xl font-bold">Random dingen</h1>
+
+<button class="btn btn-secondary" (click)="showLife = !showLife">Toggle life</button>
+
+@if (showLife) {
+	<app-life />
+}
+
+@if (snacks) {
+	<app-autocompleter [data]="snacks" (select)="handleSelect($event)" />
+}
+
+<hr />
+
 <h1 class="text-3xl font-bold">Snacks</h1>
 
 <div class="flex gap-5">
