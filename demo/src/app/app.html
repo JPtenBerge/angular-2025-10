@@ -1,36 +1,71 @@
-naam: {{ naam | lowercase }}
-<button (click)="changeName()">Verander naam</button>
+<!-- <div #iets class="bla dinges hoi">hoiiiii</div>
+{{iets.className}} -->
 
-<hr>
+<!-- <add-stuff-dialog #addStuffDialog />
+<button (click)="addStuffDialog.open()">Open dialog</button> -->
 
-nu: {{nu | date: 'd MMMM y'}}<br>
-bedrag: {{bedrag | euro}}
+<form (submit)="addSnack()" #form="ngForm">
+	<ol>
+		<li>
+			<label for="input-name">Naam:</label>
+			<input
+				id="input-name"
+				[(ngModel)]="newSnack.name"
+				name="name"
+				required
+				pattern="^[a-zA-Z -]{3,}$"
+				#inputName="ngModel"
+			/>
 
-<input [(ngModel)]="naam">
+			<!-- <validation-message for="name" /> -->
+
+			@if (inputName.touched && !inputName.valid) {
+				<span>*</span>
+			}
+			@if (inputName.touched && inputName.hasError('required')) {
+				<span>Vul in aub</span>
+			}
+			@if (inputName.touched && inputName.hasError('pattern')) {
+				<span>Enkel letters, spaties en streepjes graag. En minimaal 3 karakters.</span>
+			}
+		</li>
+		<li>
+			<label for="input-kcal">KCal:</label>
+			<input id="input-kcal" [(ngModel)]="newSnack.kcal" name="kcal" type="number" required />
+		</li>
+		<li>
+			<label for="input-photo-url">Foto URL:</label>
+			<input id="input-photo-url" [(ngModel)]="newSnack.photoUrl" name="photoUrl" required />
+		</li>
+		<li>
+			<button [disabled]="!form.valid">Voeg snack toe</button>
+		</li>
+	</ol>
+
+	<pre>{{ newSnack | json }}</pre>
+</form>
 
 <!-- <input [value]="naam" (keydown)="updateValue()" -->
 
 @if (!snacks || snacks.length === 0) {
-<p>Geen snacks momenteel!</p>
+	<p>Geen snacks momenteel!</p>
 } @else {
-<table>
-	<thead>
-		<tr>
-			<th>Naam</th>
-			<th>kcal</th>
-			<th>Foto</th>
-		</tr>
-	</thead>
-	<tbody>
-		@for (snack of snacks; track snack.name) {
-		<tr [class.vet]="snack.kcal > 100" (click)="snack.kcal = snack.kcal - 20">
-			<td>{{ snack.name }}</td>
-			<td>{{ snack.kcal }}</td>
-			<td><img [src]="snack.photoUrl" /></td>
-		</tr>
-
-		}
-	</tbody>
-</table>
-
+	<table>
+		<thead>
+			<tr>
+				<th>Naam</th>
+				<th>kcal</th>
+				<th>Foto</th>
+			</tr>
+		</thead>
+		<tbody>
+			@for (snack of snacks; track snack.name) {
+				<tr [class.vet]="snack.kcal > 100" (click)="snack.kcal = snack.kcal - 20">
+					<td>{{ snack.name }}</td>
+					<td>{{ snack.kcal }}</td>
+					<td><img [src]="snack.photoUrl" /></td>
+				</tr>
+			}
+		</tbody>
+	</table>
 }
