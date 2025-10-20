@@ -81,6 +81,24 @@ Blazor
 - browser neemt het daarna over en dus wordt het dan weer gewoon een SPA
 - complexiteit++
 
+## Pipes
+
+Default pipes:
+
+- uppercase
+- lowercase
+- titlecase
+- date
+- currency
+- json
+- async
+
+Output van pipe A is input voor pipe B:
+
+```html
+{{ name | uppercase | empty }}
+```
+
 ## Modern Angular development
 
 - signals
@@ -91,5 +109,10 @@ Blazor
 
 - oud: `*ngFor`, nieuw: `@for`
 - oud: `*ngIf`, nieuw: `@if`
+- oud: unittesten met Karma/Jasmine, nieuw: ... Jest? Vitest?
 
 
+
+## Coole links
+
+- [Framework benchmarks](https://github.com/krausest/js-framework-benchmark)
