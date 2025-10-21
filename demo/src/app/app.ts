@@ -24,21 +24,6 @@ export class App {
 	snacks?: Snack[];
 
 	ngOnInit() {
-		// Asynchronous JavaScript And JSON
-		// AJAX  vanaf JavaScript in browser === HTTP ===> server
-		// XMLHttpRequest fetch()    HttpClient?
-
-		// HttpClient vs fetch()
-		// - request/response interceptors
-		//   - standaardheaders Authorization: ...
-		//   - XML
-		//   - "2024-05-06T12:14:33Z" => new Date()
-		//   - errorhandling
-		// - automatische JSON parsing
-		// - typesafer
-		
-		// fetch<string>()
-
 		this.http.get<Snack[]>('http://localhost:3000/snacks').subscribe(snacks => {
 			this.snacks = snacks;
 			this.cdr.markForCheck();
@@ -50,9 +35,8 @@ export class App {
 			console.log('klaar!', updatedSnack);
 			this.snacks?.push(updatedSnack);
 			this.cdr.markForCheck();
-		})
+		});
 
-		// this.snacks?.push(this.newSnack);
 		this.newSnack = createSnack();
 	}
 

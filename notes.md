@@ -113,6 +113,40 @@ Output van pipe A is input voor pipe B:
 - zijn standaard singletons
 - geen interfaces, want interfaces bestaan niet in JavaScript en DI wordt at runtime uitgevoerd
 
+## Backendcommunicatie
+
+AJAX: Asynchronous JavaScript And JSON
+- vanaf JavaScript in browser === HTTP ===> server
+- vroeger via `XMLHttpRequest`, tegenwoordig meer `fetch()`. Maar Angular gebruikt een `HttpClient`?
+
+`HttpClient` vs `fetch()`?
+- request/response interceptors
+  - standaardheaders `Authorization: ...`
+  - XML parsen
+  - "2024-05-06T12:14:33Z" omzetten naar `new Date()`/`Temporal`-instanties
+  - errorhandling
+- automatische JSON-parsing
+- typesafer
+  - `fetch<string>()` is nog niet een ding in standaard TypeScript
+
+### Hoe ververs ik mijn lokale array?
+
+Multi-user scenario's even niet meegerekend.
+
+1. instant toevoegen aan de array.
+   - voordeel: lekker snel
+   - nadeel: er kan iets stukgaan bij de server. UX is erg belangrijk.
+   - nadeel: niet in sync met server. Je hebt geen ID.
+2. vanaf callback toevoegen aan de array.
+   - voordeel: meer in sync met de server. Paginatie/filtering/sortering
+   - voordeel: redelijk snel.
+   - nadeel: je moet wel je POST afwachten
+3. opnieuw ophalen.
+   - nadeel: langzaam.
+   - nadeel: alles ophalen => maximaal je server belasten
+   - voordeel: meest in sync
+   - voordeel: makkelijkst te implementeren - `.getAll()`
+
 ## Oldskool vs new school Angular
 
 - oud: `*ngFor`, nieuw: `@for`
