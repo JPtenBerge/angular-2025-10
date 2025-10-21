@@ -105,14 +105,37 @@ Output van pipe A is input voor pipe B:
 - Zoneless
 - `OnPush` change detection
 
-## oldskool vs new school Angular
+## Dependency injection
+
+- framework geeft jou instanties, je maakt ze niet zelf
+- makkelijker met unittesten 
+  - mocken
+- zijn standaard singletons
+- geen interfaces, want interfaces bestaan niet in JavaScript en DI wordt at runtime uitgevoerd
+
+## Oldskool vs new school Angular
 
 - oud: `*ngFor`, nieuw: `@for`
 - oud: `*ngIf`, nieuw: `@if`
 - oud: unittesten met Karma/Jasmine, nieuw: ... Jest? Vitest?
+- oud: `@Output` en `@Input`, nieuw: `input()` en `output()`
+- oud: in providers je service registreert, nieuw is `providedIn()`
+- oud: DI via constructor, nieuw: `inject()`
 
+## Overig
 
+**How to clone an object?**
+
+```ts
+let clone = { ...this.newSnack }; // shallow copy
+
+JSON.parse(JSON.stringify(this.newSnack))   // deep copy
+
+structuredClone(obj) // deep clone
+```
 
 ## Coole links
 
 - [Framework benchmarks](https://github.com/krausest/js-framework-benchmark)
+- [State of JS survey](https://2024.stateofjs.com/en-US/libraries/testing/)
+- [ng-mocks](https://github.com/help-me-mom/ng-mocks), toffe library om te helpen met het mocken van componenten/pipes/services

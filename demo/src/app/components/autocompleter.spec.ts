@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { Autocompleter } from './autocompleter';
-import { provideZonelessChangeDetection, signal } from '@angular/core';
 import { NavigateService } from '../services/navigate';
 
 interface Car {

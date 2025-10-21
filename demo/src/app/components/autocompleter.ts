@@ -12,7 +12,7 @@ import { NavigateService } from '../services/navigate';
 export class Autocompleter<T extends {}> {
 	data = input.required<T[]>();
 	select = output<T>();
-	navigateService = inject(NavigateService); // singleton
+	navigateService = inject(NavigateService);
 
 	query = '';
 	activeSuggestionIndex: number | null = null;
