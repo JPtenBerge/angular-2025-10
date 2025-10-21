@@ -1,3 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'tailwindcss';
 @plugin 'daisyui';
+
+
+td img {
+    max-width: 120px;
+}
+.vet {
+    background: lightgoldenrodyellow;
+}
+/* 
+input.ng-touched.ng-valid {
+    background: lightgreen;
+}
+input.ng-touched.ng-invalid {
+    background: lightpink;
+} */
+
+button:disabled {
+    box-shadow: 0 0 4px red;
+}
