@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
+import { MockProvider } from 'ng-mocks';
 import { Autocompleter } from './autocompleter';
 import { NavigateService } from '../services/navigate';
 
@@ -15,10 +16,6 @@ describe(`Component: ${Autocompleter.name}`, () => {
 	let data: Car[];
 
 	beforeEach(() => {
-		// Karma (testrunner) / Jasmine - mocks
-		navigateServiceMock = jasmine.createSpyObj<NavigateService>('navigateServiceMock', ['next']);
-		navigateServiceMock.next.and.returnValue(42);
-
 		data = [
 			{ make: 'Cupra', model: 'Born' },
 			{ make: 'Peugeot', model: 'E-48589' },
@@ -28,8 +25,11 @@ describe(`Component: ${Autocompleter.name}`, () => {
 		TestBed.configureTestingModule({
 			declarations: [],
 			imports: [Autocompleter],
-			providers: [provideZonelessChangeDetection(), { provide: NavigateService, useValue: navigateServiceMock }],
+			providers: [provideZonelessChangeDetection(), MockProvider(NavigateService)],
 		});
+		navigateServiceMock = TestBed.inject(NavigateService) as jasmine.SpyObj<NavigateService>;
+		navigateServiceMock.next.and.returnValue(42);
+
 		fixture = TestBed.createComponent(Autocompleter<Car>);
 		sut = fixture.componentInstance;
 	});
