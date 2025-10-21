@@ -2,7 +2,7 @@
 
 <div class="flex gap-5">
 	<form (submit)="addSnack()" #form="ngForm">
-		<h2 class="text-2xl font-bold">Snack toevoegen</h2>
+		<h2 class="text-2xl font-bold">Snack toevoegen (template)</h2>
 
 		<ol class="grid grid-cols-[max-content_14em_1fr] gap-x-2 gap-y-3">
 			<li class="col-span-3 grid grid-cols-subgrid items-center">
@@ -60,6 +60,46 @@
 		</ol>
 
 		<pre>{{ newSnack | json }}</pre>
+	</form>
+
+	<form (submit)="addSnackReactive()" [formGroup]="addSnackForm">
+		<h2 class="text-2xl font-bold">Snack toevoegen (reactive)</h2>
+
+		<ol class="grid grid-cols-[max-content_14em_1fr] gap-x-2 gap-y-3">
+			<li class="col-span-3 grid grid-cols-subgrid items-center">
+				<label for="input-name">Naam:</label>
+				<input id="input-name" class="input not-[.ng-untouched]:not-[.ng-valid]:input-error" formControlName="name" />
+
+				<!-- <validation-message for="name" /> -->
+
+				<div>
+					@if (f.name.touched && !f.name.valid) {
+						<span>*</span>
+					}
+					@if (f.name.touched && f.name.hasError('required')) {
+						<span>Vul in aub</span>
+					}
+					@if (f.name.touched && f.name.hasError('pattern')) {
+						<span>Enkel letters, spaties en streepjes graag. En minimaal 3 karakters.</span>
+					}
+				</div>
+			</li>
+			<li class="col-span-3 grid grid-cols-subgrid items-center">
+				<label for="input-kcal">KCal:</label>
+				<input id="input-kcal" class="input not-[.ng-untouched]:not-[.ng-valid]:input-error" type="number" formControlName="kcal" />
+				<div></div>
+			</li>
+			<li class="col-span-3 grid grid-cols-subgrid items-center">
+				<label for="input-photo-url">Foto URL:</label>
+				<input id="input-photo-url" class="input not-[.ng-untouched]:not-[.ng-valid]:input-error" formControlName="photoUrl" />
+				<div></div>
+			</li>
+			<li class="col-span-3">
+				<button [disabled]="!addSnackForm.valid" class="btn btn-primary">Voeg snack toe</button>
+			</li>
+		</ol>
+
+		<pre>{{ addSnackForm.value | json }}</pre>
 	</form>
 
 	<!-- <input [value]="naam" (keydown)="updateValue()" -->

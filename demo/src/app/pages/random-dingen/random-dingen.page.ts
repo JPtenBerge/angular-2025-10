@@ -4,9 +4,10 @@ import { Snack } from '../../entities/snack';
 import { Life } from '../../components/life';
 import { Autocompleter } from '../../components/autocompleter';
 import { ActivatedRoute } from '@angular/router';
+import { ComponentsModule } from '../../components/components.module';
 
 @Component({
-	imports: [Life, Autocompleter],
+	imports: [Life, ComponentsModule],
 	templateUrl: './random-dingen.page.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })

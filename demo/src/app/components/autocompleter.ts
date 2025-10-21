@@ -6,8 +6,8 @@ import { NavigateService } from '../services/navigate';
 @Component({
 	selector: 'app-autocompleter',
 	templateUrl: './autocompleter.html',
-	imports: [FormsModule, JsonPipe],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: false,
 })
 export class Autocompleter<T extends {}> {
 	data = input.required<T[]>();
