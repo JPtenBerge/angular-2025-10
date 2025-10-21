@@ -1,9 +1,10 @@
 import { JsonPipe } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Life } from './components/life';
 import { Autocompleter } from './components/autocompleter';
 import { createSnack, Snack } from './entities/snack';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
 	selector: 'app-root',
@@ -14,32 +15,44 @@ import { createSnack, Snack } from './entities/snack';
 export class App {
 	protected readonly title = signal('demo');
 
+	http = inject(HttpClient);
+	cdr = inject(ChangeDetectorRef);
+
 	showLife = false;
 	newSnack = createSnack();
 
-	snacks?: Snack[] = [
-		{
-			name: 'Kipnugget',
-			kcal: 60,
-			photoUrl:
-				'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.restauranttakeoff.nl%2Fwp-content%2Fuploads%2F2020%2F01%2FKipnuggets.png&f=1&nofb=1&ipt=934c20c66ff4f02110b748ece8f76fa4a38141fd0073861080511691496427bf',
-		},
-		{
-			name: 'Frikandel',
-			kcal: 140,
-			photoUrl:
-				'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsnackfuture.com%2Fwp-content%2Fuploads%2F2022%2F07%2FFrikandel-of-frikadel-2259140871-1660121827584.jpg&f=1&nofb=1&ipt=41908c826b4c8fd76ada92a45db4cdf594e618f7c538f550e1c0f8ac107f01f6',
-		},
-		{
-			name: 'Mexicano',
-			kcal: 170,
-			photoUrl:
-				'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdegrotegoesting.be%2Fwp-content%2Fuploads%2F2020%2F10%2FFrituurdegrotegoesting_website_productfotos_mexicano-768x512.jpg&f=1&nofb=1&ipt=fab1470356d814cbb546e35c173e18582429af4e0553a96b9110805d094b1043',
-		},
-	];
+	snacks?: Snack[];
+
+	ngOnInit() {
+		// Asynchronous JavaScript And JSON
+		// AJAX  vanaf JavaScript in browser === HTTP ===> server
+		// XMLHttpRequest fetch()    HttpClient?
+
+		// HttpClient vs fetch()
+		// - request/response interceptors
+		//   - standaardheaders Authorization: ...
+		//   - XML
+		//   - "2024-05-06T12:14:33Z" => new Date()
+		//   - errorhandling
+		// - automatische JSON parsing
+		// - typesafer
+		
+		// fetch<string>()
+
+		this.http.get<Snack[]>('http://localhost:3000/snacks').subscribe(snacks => {
+			this.snacks = snacks;
+			this.cdr.markForCheck();
+		});
+	}
 
 	addSnack() {
-		this.snacks?.push(this.newSnack);
+		this.http.post<Snack>('http://localhost:3000/snacks', this.newSnack).subscribe(updatedSnack => {
+			console.log('klaar!', updatedSnack);
+			this.snacks?.push(updatedSnack);
+			this.cdr.markForCheck();
+		})
+
+		// this.snacks?.push(this.newSnack);
 		this.newSnack = createSnack();
 	}
 

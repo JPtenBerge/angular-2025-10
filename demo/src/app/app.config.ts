@@ -2,6 +2,7 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessC
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
+import { provideHttpClient } from '@angular/common/http';
 // import { NavigateService } from './services/navigate';
 
 export const appConfig: ApplicationConfig = {
@@ -10,8 +11,9 @@ export const appConfig: ApplicationConfig = {
 		provideBrowserGlobalErrorListeners(),
 		provideZonelessChangeDetection(),
 		provideRouter(routes),
+		provideHttpClient(),
 
-    // { provide: NavigateService, useFactory: () =>  }
-    // NavigateService
+		// { provide: NavigateService, useFactory: () =>  }
+		// NavigateService
 	],
 };

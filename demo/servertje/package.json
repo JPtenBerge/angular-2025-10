@@ -1,0 +1,15 @@
+{
+	"name": "servertje",
+	"version": "1.0.0",
+	"description": "",
+	"license": "ISC",
+	"author": "",
+	"type": "commonjs",
+	"main": "index.js",
+	"scripts": {
+		"start": "json-server ./endpoints.json --delay 2000"
+	},
+	"dependencies": {
+		"json-server": "^0.17.4"
+	}
+}
