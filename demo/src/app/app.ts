@@ -1,29 +1,13 @@
-import { CurrencyPipe, DatePipe, JsonPipe, LowerCasePipe, UpperCasePipe } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
-import { EuroPipe } from './euro.pipe';
 import { Life } from './components/life';
 import { Autocompleter } from './components/autocompleter';
-
-interface Snack {
-	name: string;
-	kcal: number;
-	photoUrl: string;
-}
-
-const createSnack = (overrides?: Partial<Snack>): Snack => {
-	return {
-		name: '',
-		kcal: 0,
-		photoUrl: '',
-		...overrides,
-	};
-};
+import { createSnack, Snack } from './entities/snack';
 
 @Component({
 	selector: 'app-root',
-	imports: [RouterOutlet, FormsModule, Life, Autocompleter, EuroPipe, JsonPipe, CurrencyPipe, DatePipe, LowerCasePipe, UpperCasePipe],
+	imports: [FormsModule, Life, Autocompleter, JsonPipe],
 	templateUrl: './app.html',
 	styleUrl: './app.css',
 })
@@ -31,11 +15,7 @@ export class App {
 	protected readonly title = signal('demo');
 
 	showLife = false;
-
-	// newSnack: Snack = { name: '', kcal: 0, photoUrl: ''};
-	// newSnack = {} as Snack;
 	newSnack = createSnack();
-	// newSnack = createSnack({ name: 'Meixcano' });
 
 	snacks?: Snack[] = [
 		{
@@ -59,17 +39,11 @@ export class App {
 	];
 
 	addSnack() {
-		// how to clone an object?
-		// 1. let clone = { ...this.newSnack }; // shallow copy
-		// 2. JSON.parse(JSON.stringify(this.newSnack))   // deep copy
-		// 3. structuredClone(obj) // deep clone
-		// 4. this.newSnack = createSnack();
-
 		this.snacks?.push(this.newSnack);
 		this.newSnack = createSnack();
 	}
 
-  handleSelect(snack: Snack) {
-    console.log('hey er is iets geselecteerd:', snack);
-  }
+	handleSelect(snack: Snack) {
+		console.log('hey er is iets geselecteerd:', snack);
+	}
 }
