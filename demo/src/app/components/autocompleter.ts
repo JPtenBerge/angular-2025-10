@@ -1,6 +1,7 @@
 import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NavigateService } from '../services/navigate';
 
 @Component({
 	selector: 'app-autocompleter',
@@ -11,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 export class Autocompleter<T extends {}> {
 	data = input.required<T[]>();
 	select = output<T>();
+	navigateService = inject(NavigateService); // singleton
 
 	query = '';
 	activeSuggestionIndex: number | null = null;
@@ -41,8 +43,7 @@ export class Autocompleter<T extends {}> {
 	next() {
 		if (!this.suggestions) return;
 
-		this.activeSuggestionIndex ??= -1;
-		this.activeSuggestionIndex = (this.activeSuggestionIndex + 1) % this.suggestions.length;
+		this.activeSuggestionIndex = this.navigateService.next(this.suggestions, this.activeSuggestionIndex);
 	}
 
 	handleSelect() {
