@@ -147,6 +147,41 @@ Multi-user scenario's even niet meegerekend.
    - voordeel: meest in sync
    - voordeel: makkelijkst te implementeren - `.getAll()`
 
+## Routing
+
+Conceptueel kan een SPA routing op een aantal manieren implementeren:
+
+1. heel veel elementen in de DOM
+    ```html
+    <div id="page1" style="display: none;">
+    <div id="page2">
+    <div id="page3" style="display: none;">
+    <div id="page..." style="display: none;">
+    <div id="page299" style="display: none;">
+    <div id="page300" style="display: none;">
+    ```
+2. alle paginatemplates in strings in-memory opslaan
+    ```ts
+    let pages = [`<div id="...">`, `...`]
+    ```
+3. lazy loading - paginatemplate opvragen bij server als de gebruiker naar die pagina wil
+
+
+Routing doorvoeren:
+
+- `<router-outlet />` opnemen in je `app.html`
+- routedefinities - /url => paginacomponent
+- alles opsplitsen in pagina's
+
+Features van Angular's router:
+
+- basic routing
+- parameters
+- route guards
+- route resolvers
+- lazy loading
+- child routes
+
 ## Oldskool vs new school Angular
 
 - oud: `*ngFor`, nieuw: `@for`
@@ -155,6 +190,7 @@ Multi-user scenario's even niet meegerekend.
 - oud: `@Output` en `@Input`, nieuw: `input()` en `output()`
 - oud: in providers je service registreert, nieuw is `providedIn()`
 - oud: DI via constructor, nieuw: `inject()`
+- oud: route parameters via `ActivatedRoute` injecteren, nieuw: `withComponentInputBinding()`
 
 ## Overig
 
