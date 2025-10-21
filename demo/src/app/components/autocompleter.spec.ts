@@ -3,6 +3,7 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { MockProvider } from 'ng-mocks';
 import { Autocompleter } from './autocompleter';
 import { NavigateService } from '../services/navigate';
+import { setInput } from '../../utils/set-input';
 
 interface Car {
 	make: string;
@@ -31,13 +32,13 @@ describe(`Component: ${Autocompleter.name}`, () => {
 		navigateServiceMock.next.and.returnValue(42);
 
 		fixture = TestBed.createComponent(Autocompleter<Car>);
+		setInput(fixture, 'data', data);
 		sut = fixture.componentInstance;
 	});
 
 	it('autocompletes', () => {});
 
 	it(`uses ${NavigateService.name} for nexting`, () => {
-		fixture.componentRef.setInput('data', data);
 		sut.autocomplete();
 
 		sut.next();
