@@ -182,6 +182,18 @@ Features van Angular's router:
 - lazy loading
 - child routes
 
+## Reactive vs template forms
+
+Voordelen reactive:
+
+- Dynamisch formulier opbouwen is iets makkelijker in reactive
+- scheiding tussen template/formdefinitie is fijn
+- functioneel:
+  - custom validators zijn makkelijker te maken (gewone function vs directive)
+  - unittesten is makkelijker (template hoeft niet gerenderd te worden)
+
+Maar, er is verder niks mis met template-driven. Is puur voorkeur.
+
 ## Oldskool vs new school Angular
 
 - oud: `*ngFor`, nieuw: `@for`
@@ -191,6 +203,7 @@ Features van Angular's router:
 - oud: in providers je service registreert, nieuw is `providedIn()`
 - oud: DI via constructor, nieuw: `inject()`
 - oud: route parameters via `ActivatedRoute` injecteren, nieuw: `withComponentInputBinding()`
+- oud: met modules, nieuw: standalone (v14+)
 
 ## Overig
 
