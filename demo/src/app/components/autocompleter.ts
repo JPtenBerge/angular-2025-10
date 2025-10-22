@@ -1,7 +1,8 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule } from '@angular/forms';
 import { NavigateService } from '../services/navigate';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
 	selector: 'app-autocompleter',
@@ -14,12 +15,20 @@ export class Autocompleter<T extends {}> {
 	select = output<T>();
 	navigateService = inject(NavigateService);
 
-	query = '';
+	query = new FormControl('');
 	activeSuggestionIndex: number | null = null;
 
 	suggestions?: T[];
 
+
+	ngOnInit() {
+		this.query.valueChanges
+			.pipe(debounceTime(300), distinctUntilChanged())
+			.subscribe(value => this.autocomplete());
+	}
+
 	autocomplete() {
+		console.log('autocompleting!', this.query.value)
 		this.suggestions = [];
 
 		for (let item of this.data()) {
@@ -32,7 +41,7 @@ export class Autocompleter<T extends {}> {
 					continue;
 				}
 
-				if (value.includes(this.query)) {
+				if (value.includes(this.query.value!)) {
 					this.suggestions.push(item);
 					break;
 				}

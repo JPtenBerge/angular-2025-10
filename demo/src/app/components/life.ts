@@ -35,5 +35,6 @@ export class Life {
         // - indexeddb
         // - I/O-operaties  FileReader
         // - timers
+        // - observable subscriptions
     }
 }

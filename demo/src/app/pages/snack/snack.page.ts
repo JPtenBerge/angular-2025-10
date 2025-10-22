@@ -1,9 +1,10 @@
 import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, signal } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
+import { AbstractControl, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { createSnack, Snack } from '../../entities/snack';
 import { FocusOnDirective } from '../../directives/focus-on';
+import { SnackDal } from '../../dal/snack.dal';
 
 function mijnValidator(control: AbstractControl) {
 	// return { mijn: 'nope' };
@@ -19,6 +20,7 @@ export class SnackPage {
 	http = inject(HttpClient);
 	cdr = inject(ChangeDetectorRef);
 	fb = inject(NonNullableFormBuilder);
+	snackDal = inject(SnackDal);
 
 	newSnack = createSnack();
 	isFetchingSnacks = false;
@@ -44,7 +46,9 @@ export class SnackPage {
 
 	ngOnInit() {
 		this.isFetchingSnacks = true;
-		this.http.get<Snack[]>('http://localhost:3000/snacks').subscribe(snacks => {
+
+		this.snackDal.getAll().subscribe(snacks => {
+			console.log('snacks:', snacks);
 			this.isFetchingSnacks = false;
 			this.snacks = snacks;
 			this.cdr.markForCheck();
@@ -52,11 +56,12 @@ export class SnackPage {
 	}
 
 	addSnack() {
-		this.http.post<Snack>('http://localhost:3000/snacks', this.newSnack).subscribe(updatedSnack => {
-			console.log('klaar!', updatedSnack);
-			this.snacks?.push(updatedSnack);
-			this.cdr.markForCheck();
-		});
+		this.snackDal.add(this.newSnack);
+		// .subscribe(updatedSnack => {
+		// 	console.log('klaar!', updatedSnack);
+		// 	this.snacks?.push(updatedSnack);
+		// 	this.cdr.markForCheck();
+		// });
 
 		this.newSnack = createSnack();
 	}
@@ -69,12 +74,11 @@ export class SnackPage {
 		// });
 		// this.addSnackForm.reset();
 
-		this.addSnacky(this.addSnackForm.getRawValue());
+		this.snackDal.add(this.addSnackForm.getRawValue());
 
-
+		// this.addSnacky(this.addSnackForm.getRawValue());
 
 		// this.addSnackForm.controls.name.setValue('');
-
 	}
 
 	addSnacky(snack: Snack) {
