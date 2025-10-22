@@ -86,12 +86,22 @@
 			</li>
 			<li class="col-span-3 grid grid-cols-subgrid items-center">
 				<label for="input-kcal">KCal:</label>
-				<input id="input-kcal" class="input not-[.ng-untouched]:not-[.ng-valid]:input-error" type="number" formControlName="kcal" />
+				<input
+					id="input-kcal"
+					class="input not-[.ng-untouched]:not-[.ng-valid]:input-error"
+					type="number"
+					formControlName="kcal"
+					[focusOn]="f.name.value.length > 10"
+				/>
 				<div></div>
 			</li>
 			<li class="col-span-3 grid grid-cols-subgrid items-center">
 				<label for="input-photo-url">Foto URL:</label>
-				<input id="input-photo-url" class="input not-[.ng-untouched]:not-[.ng-valid]:input-error" formControlName="photoUrl" />
+				<input
+					id="input-photo-url"
+					class="input not-[.ng-untouched]:not-[.ng-valid]:input-error"
+					formControlName="photoUrl"
+				/>
 				<div></div>
 			</li>
 			<li class="col-span-3">

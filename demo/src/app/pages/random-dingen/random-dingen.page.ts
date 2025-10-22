@@ -5,9 +5,10 @@ import { Life } from '../../components/life';
 import { Autocompleter } from '../../components/autocompleter';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentsModule } from '../../components/components.module';
+import { ValOpDirective } from '../../directives/val-op';
 
 @Component({
-	imports: [Life, ComponentsModule],
+	imports: [Life, ComponentsModule, ValOpDirective],
 	templateUrl: './random-dingen.page.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })

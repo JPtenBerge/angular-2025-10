@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, signal }
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { createSnack, Snack } from '../../entities/snack';
+import { FocusOnDirective } from '../../directives/focus-on';
 
 function mijnValidator(control: AbstractControl) {
 	// return { mijn: 'nope' };
@@ -10,7 +11,7 @@ function mijnValidator(control: AbstractControl) {
 }
 
 @Component({
-	imports: [FormsModule, ReactiveFormsModule, JsonPipe],
+	imports: [FormsModule, ReactiveFormsModule, JsonPipe, FocusOnDirective],
 	templateUrl: './snack.page.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })

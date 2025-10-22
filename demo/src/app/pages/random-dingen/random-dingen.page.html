@@ -4,12 +4,12 @@
 <!-- <add-stuff-dialog #addStuffDialog />
 <button (click)="addStuffDialog.open()">Open dialog</button> -->
 
-<h1 class="text-3xl font-bold">Random dingen</h1>
+<h1 class="text-3xl font-bold" valOp="red">Random dingen</h1>
 
 <button class="btn btn-secondary" (click)="showLife = !showLife">Toggle life</button>
 
 @if (showLife) {
-	<app-life />
+	<app-life valOp="green" />
 }
 
 @if (snacks) {
