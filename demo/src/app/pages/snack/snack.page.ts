@@ -17,7 +17,14 @@ function mijnValidator(control: AbstractControl) {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SnackPage {
-	http = inject(HttpClient);
+
+	name = 'Reinier';
+
+	changeName() {
+		setTimeout(() => this.name = 'Danny', 2000);
+	}
+
+	// http = inject(HttpClient);
 	cdr = inject(ChangeDetectorRef);
 	fb = inject(NonNullableFormBuilder);
 	snackDal = inject(SnackDal);
@@ -81,7 +88,7 @@ export class SnackPage {
 		// this.addSnackForm.controls.name.setValue('');
 	}
 
-	addSnacky(snack: Snack) {
-		this.http.post<Snack>('http://localhost:3000/snacks', snack);
-	}
+	// addSnacky(snack: Snack) {
+	// 	this.http.post<Snack>('http://localhost:3000/snacks', snack);
+	// }
 }

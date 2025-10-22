@@ -73,6 +73,7 @@
 					"options": {
 						"tsConfig": "tsconfig.spec.json",
 						"main": "src/test.ts",
+						"polyfills": ["zone.js", "zone.js/testing"],
 						"assets": [
 							{
 								"glob": "**/*",
