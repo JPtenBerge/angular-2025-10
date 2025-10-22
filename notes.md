@@ -318,3 +318,4 @@ structuredClone(obj); // deep clone
 - [ng-mocks](https://github.com/help-me-mom/ng-mocks), toffe library om te helpen met het mocken van componenten/pipes/services
 - [TanStack Form](https://tanstack.com/form/latest/docs/framework/angular/examples/simple), signal-based forms. Interessante overweging gezien Angular's form support nog niet signal-based is.
 - [RxMarbles](https://rxmarbles.com), geinige visualisatie van RxJS-operators
+- [Rx Playground](https://softwaremill.com/learn-reactive-programming-with-rx-playground), coole 3D-visualisatie van RxJS-operators
