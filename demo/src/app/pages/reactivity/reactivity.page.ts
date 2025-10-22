@@ -1,5 +1,18 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
-import { BehaviorSubject, filter, map, Observable, ReplaySubject, Subject, Subscription, takeUntil } from 'rxjs';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnDestroy } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject, filter, map, Observable, ReplaySubject, Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+// export const destroyMixin = () => {
+// 	return class implements OnDestroy {
+// 		destroyRef = new Subject<void>();
+
+// 		ngOnDestroy(): void {
+// 			this.destroyRef.next();
+// 			this.destroyRef.complete();
+// 		}
+// 	};
+// };
 
 @Component({
 	imports: [],
@@ -11,13 +24,16 @@ export class ReactivityPage {
 	subscription!: Subscription;
 
 	ngOnInit() {
-		let source = new ReplaySubject<number>(1);
+		// Hongaarse notatie
+		let source$ = new ReplaySubject<number>(1);
 		// source.next(4);
-		source.next(8);
+		source$.next(8);
 		// source.next(15);
 		// source.next(15);
 
-		this.subscription = source.subscribe(value => console.log('subscribe value:', value));
+		this.subscription = source$
+			.pipe(takeUntilDestroyed(this.destroyRef))
+			.subscribe(value => console.log('subscribe value:', value));
 
 		// this.subscription = source
 		// 	.pipe(
@@ -30,13 +46,9 @@ export class ReactivityPage {
 		// source.complete();
 
 		setTimeout(() => {
-			source.next(16);
-			source.next(23);
-			source.next(42);
+			source$.next(16);
+			source$.next(23);
+			source$.next(42);
 		}, 3000);
-	}
-
-	ngOnDestroy() {
-		this.subscription.unsubscribe();
 	}
 }
