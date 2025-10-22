@@ -223,6 +223,43 @@ input[type="text"] { /* ... */ }
 [type] { /* ... */ }
 ```
 
+## Reactivity met Observables
+
+Zitten momenteel nog echt in de core van Angular:
+
+- `this.form.valueChanges`
+- `this.route.params`
+- `this.http.get()`
+
+Datatypen die centraal staan:
+
+- `Observable`: readonly stream aan data
+- `Subject`: writable Observable
+- `BehaviorSubject`: emit altijd de laatste value bij subscriben. initiele waarde verplicht.
+- `ReplaySubject`: geschiedenis instelbaar.
+
+### Subscriptions opruimen
+
+Kan in `ngOnDestroy()`:
+
+```ts
+ngOnDestroy() {
+  this.subscription.unsubscribe();
+  this.subscription2.unsubscribe();
+  this.subscription3.unsubscribe();
+  this.subscription4.unsubscribe();
+  this.subscription5.unsubscribe();
+}
+```
+
+Maar met veel subscriptions oogt dat wat rommelig en is het makkelijk om er eentje over 't hoofd te zien. Eleganter is het bij het aanmaken meteen te doen:
+
+```ts
+this.subscription = source
+	.pipe(takeUntilDestroyed(this.destroyRef))
+	.subscribe(value => console.log('subscribe value:', value));
+```
+
 ## Folderstructuur
 
 Over het algemeen zoiets:
@@ -280,3 +317,4 @@ structuredClone(obj); // deep clone
 - [State of JS survey](https://2024.stateofjs.com/en-US/libraries/testing/)
 - [ng-mocks](https://github.com/help-me-mom/ng-mocks), toffe library om te helpen met het mocken van componenten/pipes/services
 - [TanStack Form](https://tanstack.com/form/latest/docs/framework/angular/examples/simple), signal-based forms. Interessante overweging gezien Angular's form support nog niet signal-based is.
+- [RxMarbles](https://rxmarbles.com), geinige visualisatie van RxJS-operators
