@@ -261,6 +261,28 @@ this.subscription = source
 	.subscribe(value => console.log('subscribe value:', value));
 ```
 
+## Zone.js
+
+Implementeert eigen implementaties voor native functies - "open-heart surgery on the browser"
+
+```ts
+let originalTimeout = window.setTimeout;
+
+window.setTimeout = (callback, ms) => {
+	originalTimeout(() => {
+		callback();
+		runChangeDetection();
+	}, ms);
+};
+```
+
+Zoneless:
+- trendy!
+- scheelt zo'n 25kb in je bundle
+- minder magie, beter voor performance en makkelijker debuggen
+
+`tick()` en `fakeAsync()` zijn voorlopig nog wel afhankelijk van Zone, dus bij testen nog wel vaak vereist.
+
 ## Signals
 
 - reactivity - reify reactivity
