@@ -13,8 +13,8 @@ import { ValOpDirective } from '../../directives/val-op';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RandomDingenPage {
-	http = inject(HttpClient);
-	cdr = inject(ChangeDetectorRef);
+	private http = inject(HttpClient);
+	private cdr = inject(ChangeDetectorRef);
 	// route = inject(ActivatedRoute);
 
 	showLife = false;

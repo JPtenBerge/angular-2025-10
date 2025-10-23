@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthPage {
-	authService = inject(AuthService);
+	private authService = inject(AuthService);
 
 	login() {
 		this.authService.login();
