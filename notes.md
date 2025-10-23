@@ -283,6 +283,46 @@ Zoneless:
 
 `tick()` en `fakeAsync()` zijn voorlopig nog wel afhankelijk van Zone, dus bij testen nog wel vaak vereist.
 
+## End-to-end testen
+
+Testpiramide!
+
+- end-to-end/UI
+  - hier roep je je code NIET aan
+  - browser aan het aansturen om door de UI heen te lopen
+  - UI test als je de backend wegmocht, end-to-end als je de hele linie betrekt
+  - libs: Playwright, Cypress, Selenium, TestCafe, Nightwatch, Webdriver I/O, Protractor 💀 (deprecated, was ooit specifiek voor AngularJS/Angular)
+- integration
+  - iets aan het integereren
+  - HTML rendereren (aka unit)
+  - database 
+  - API-request
+  - class A met class B
+  - hier roep je je code aan
+- unit tests
+  - zo klein mogelijk stukje code testen - 1 pad in 1 functie/methode
+  - hier roep je je code aan
+
+Playwright:
+
+- sinds 2020
+- van Microsoft
+- API aanspreekbaar via TS, JS, C# en Java
+- ondersteunt meerdere browsers: Firefox, Chromium, WebKit (Safari)
+  - installeert eigen browsers in plaats van je al geinstalleerde browser in te zetten
+- geen paywall, maar wel toffe features
+  - keyboard-driven UIs
+    ```ts
+    page.keyboard.press('U');
+    cy.get('input').type('qqq');
+    ```
+  - screenshotten/videos maken
+    - met awesome diff-slider als screenshot niet matcht
+  - auto-waiting
+    ```ts
+    await expect(element).toHaveText('bla');
+    ```
+
 ## Signals
 
 - reactivity - reify reactivity
