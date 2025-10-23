@@ -68,7 +68,12 @@
 		<ol class="grid grid-cols-[max-content_14em_1fr] gap-x-2 gap-y-3">
 			<li class="col-span-3 grid grid-cols-subgrid items-center">
 				<label for="input-name">Naam:</label>
-				<input id="input-name" class="input not-[.ng-untouched]:not-[.ng-valid]:input-error" formControlName="name" />
+				<input
+					id="input-name"
+					class="input not-[.ng-untouched]:not-[.ng-valid]:input-error"
+					formControlName="name"
+					placeholder="De snacknaam graag"
+				/>
 
 				<!-- <validation-message for="name" /> -->
 
@@ -91,7 +96,7 @@
 					class="input not-[.ng-untouched]:not-[.ng-valid]:input-error"
 					type="number"
 					formControlName="kcal"
-					[focusOn]="f.name.value.length > 10"
+					placeholder="De kcals graag"
 				/>
 				<div></div>
 			</li>
@@ -101,11 +106,12 @@
 					id="input-photo-url"
 					class="input not-[.ng-untouched]:not-[.ng-valid]:input-error"
 					formControlName="photoUrl"
+					placeholder="Een URL van de snack graag"
 				/>
 				<div></div>
 			</li>
 			<li class="col-span-3">
-				<button [disabled]="!addSnackForm.valid" class="btn btn-primary">Voeg snack toe</button>
+				<button [disabled]="!addSnackForm.valid" class="btn btn-primary">Voeg snack reactive toe</button>
 			</li>
 		</ol>
 
