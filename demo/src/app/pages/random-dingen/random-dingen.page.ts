@@ -29,7 +29,7 @@ export class RandomDingenPage {
 	}
 
 	ngOnInit() {
-		// this.route.para?
+		// this.route.params.subscribe()?
 
 		this.http.get<Snack[]>('http://localhost:3000/snacks').subscribe(snacks => {
 			this.snacks = snacks;
