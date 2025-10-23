@@ -186,6 +186,7 @@ Features van Angular's router:
 - parameters
 - route guards
 - route resolvers
+  - op de overzichtspagina alvast data ophalen die nodig is voor de opvolgpagina (detailspagina)
 - lazy loading
 - child routes
 
@@ -260,6 +261,29 @@ this.subscription = source
 	.subscribe(value => console.log('subscribe value:', value));
 ```
 
+## Signals
+
+- reactivity - reify reactivity
+  - "to make something abstract more real/concrete"
+- explicit reactivity
+  - verandering triggert code en kan inhaken op het tijdsaspect, parameter rondsturen, waarde baseren op andere waarde
+- native in Angular
+  - haken WEL in change detection - geen `.markForCheck()` meer! Gaat zeer goed hand-in-hand met Zoneless/`OnPush`
+- zeer vergelijkbaar met observables, maar dan simpeler
+  - geen pipes, dus `filter()` en `map()` etc. oldschool procedureel uitprogrammeren
+- houden intern een dependency graph bij waardoor je nooit hoeft te `.unsubscribe()`
+- `hype++;`
+
+Aantal core modules van Angular zijn nog niet signal-based:
+
+- Forms - alternatief: TanStack Form?
+- `HttpClient` - alternatief: `fetch()`, TanStack Query
+- Routing - alternatief: TanStack Router? Analog Router?
+
+Helpers:
+- `resource()` - helper signal voor algemeen async processen
+- `httpResource()` - helper signal voor backendcommunicatie
+
 ## Folderstructuur
 
 Over het algemeen zoiets:
@@ -298,6 +322,7 @@ En vertical slice architecture is hier ook toepasbaar door voor een Admin-featur
 - oud: DI via constructor, nieuw: `inject()`
 - oud: route parameters via `ActivatedRoute` injecteren, nieuw: `withComponentInputBinding()`
 - oud: met modules, nieuw: standalone (v14+)
+- oud: geen signals, nieuw: signals
 
 ## Overig
 

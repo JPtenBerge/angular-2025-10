@@ -6,43 +6,26 @@ import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/c
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalsPage {
+	// implicit reactivity
+	naam = 'Lucas';
+	changeName() {
+		setTimeout(() => {
+			console.log('Naam veranderd');
+			this.naam += ' Reinier'; // implicit reactivty
+		}, 100);
+	}
 
-  // signals?
-  // - observables, maar dan simpeler
-  //   - geen pipes, dus filter() en map() etc. oldschool procedureel uitprogrammeren
-  // - reactivity - reify reactivity
-  //   "to make something abstract more real/concrete"
-  // - explicit reactivity
-  // - native in Angular
-  //   - haken WEL in change detection - .markForCheck()
+	// explicit reactivity
+	counter = signal(42);
+	andereCounter = signal(108);
+	doubled = computed(() => {
+		return this.counter() * this.andereCounter();
+	});
 
-  naam = 'Lucas';
-  changeName() {
-    setTimeout(() => {
-      console.log('Naam veranderd');
-      this.naam += ' Reinier'; // implicit reactivty
-    }, 100);
-  }
-  // verandering: tijdsaspect, parameter rondsturen, waarde baseren
-
-  counter = signal(42);
-  andereCounter = signal(108);
-
-
-
-  doubled = computed(() => {
-    return this.counter() * this.andereCounter()
-  });
-  // dependency graph
-  // - nooit te .unsubscribe()
-  
-
-  increment() {
-    // this.doubled.set
-
-    setTimeout(() => {
-      this.counter.set(108);
-    }, 1000);
-  }
-
+	increment() {
+		// this.doubled.set
+		setTimeout(() => {
+			this.counter.set(108);
+		}, 1000);
+	}
 }
