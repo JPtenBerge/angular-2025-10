@@ -313,7 +313,7 @@ Playwright:
 - geen paywall, maar wel toffe features
   - keyboard-driven UIs
     ```ts
-    page.keyboard.press('U');
+    await page.keyboard.press('U');
     cy.get('input').type('qqq');
     ```
   - screenshotten/videos maken
